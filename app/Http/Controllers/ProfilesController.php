@@ -29,9 +29,12 @@ class ProfilesController extends Controller
                     }
                 }
 
+                $isCurrentLoginUserProfile = (bool) (auth()->user()->id == $name);
+
                 return view("home", [
                     "user" => $user,
-                    "posts" => $postsHtml
+                    "posts" => $postsHtml,
+                    "isCurrentLoginUserProfile" => $isCurrentLoginUserProfile
                 ]);
             } else {
                 return response()->json(["message" => "User not found"], 404);

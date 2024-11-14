@@ -8,7 +8,16 @@
         </div>
         <div class="col-9">
             <div>
-                <h1>{{ $user->name }}</h1>
+                <div class="d-flex justify-content-between">
+                    <h1>{{ $user->name }}</h1>
+                    <div>
+                        @if ($isCurrentLoginUserProfile)
+                        <a class="btn btn-primary small-primary-btn" href="/post/create">Create Post</a>
+                        @else
+                        <a class="btn btn-primary small-primary-btn" href="/profile/{{ $user->id }}">Follow</a>
+                        @endif
+                    </div>
+                </div>
             </div>
             <div class="d-flex">
                 <div class="pe-3"><strong>153</strong>posts</div>
