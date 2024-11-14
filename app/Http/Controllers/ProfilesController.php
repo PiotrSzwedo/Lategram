@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfilesController extends Controller
 {
@@ -46,5 +47,33 @@ class ProfilesController extends Controller
         }
 
         abort(404);
+    }
+
+    public function editProfile(){
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $user = User::find(auth()->user()->id);
+
+        return view("profile/edit", ["user" => $user]);
+    }
+
+    public function update(User $user){
+        if ($user->id != auth()->user()->id) abort(403);
+
+        $data = request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'webpage' => 'url',
+            'image' => '',
+        ]);
+
+        auth()->user()->profile->update(array_merge(
+            $data,
+            $imageArray ?? []
+        ));
+
+        return redirect("/profile/{$user->id}");
     }
 }

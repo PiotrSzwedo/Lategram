@@ -61,7 +61,7 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <a  class="dropdown-item" href="">Edit Profile</a>
+                                    <a  class="dropdown-item" href="/account/profile/edit">Edit Profile</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
