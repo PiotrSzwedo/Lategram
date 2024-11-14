@@ -25,6 +25,8 @@ Route::get('/profile/', [App\Http\Controllers\ProfilesController::class, 'index'
 
 Route::get('/profile/{name}', [App\Http\Controllers\ProfilesController::class, 'show']);
 
+Route::get('/profile/{id}/edit', [App\Http\Controllers\ProfilesController::class, 'edit']);
+
 Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create']);
 
 Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show']);

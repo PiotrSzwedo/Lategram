@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-3 p--5">
-            <img class="image rounded-circle" src="https://play-lh.googleusercontent.com/MoaYYQjGtmGLhG9HbjCDKyj44kwHj1HfbCI2Am70elRm35vJ-u4y4X5uEJjP97MAAsU" alt="">
+            <img class="image rounded-circle" src="storage/" alt="">
         </div>
         <div class="col-9">
             <div>
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="d-flex">
-                <div class="pe-3"><strong>153</strong>posts</div>
+                <div class="pe-3"><strong>{{ count($user->posts) }}</strong>posts</div>
                 <div class="pe-3"><strong>23K</strong>followers</div>
                 <div class="pe-3"><strong>212</strong>following</div>
             </div>

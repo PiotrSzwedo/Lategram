@@ -18,7 +18,7 @@ class ProfilesController extends Controller
     public function show($name = null)
     {
         if ($name != null && is_numeric($name)) {
-            $user = User::with('profile', 'posts')->find($name);
+            $user = User::find($name);
 
             if ($user) {
                 $postsHtml = '';
@@ -29,7 +29,11 @@ class ProfilesController extends Controller
                     }
                 }
 
-                $isCurrentLoginUserProfile = (bool) (auth()->user()->id == $name);
+                if (auth()->user()){
+                    $isCurrentLoginUserProfile = (bool) (auth()->user()->id == $name);
+                }else {
+                    $isCurrentLoginUserProfile = false;
+                }
 
                 return view("home", [
                     "user" => $user,
@@ -37,10 +41,10 @@ class ProfilesController extends Controller
                     "isCurrentLoginUserProfile" => $isCurrentLoginUserProfile
                 ]);
             } else {
-                return response()->json(["message" => "User not found"], 404);
+                abort(404);
             }
         }
 
-        return response()->json(["message" => "Invalid user ID"], 400);
+        abort(404);
     }
 }

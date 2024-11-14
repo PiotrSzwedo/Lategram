@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 window._ = _;
 
 /**
