@@ -61,7 +61,8 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <a  class="dropdown-item" href="/account/profile/edit">Edit Profile</a>
+                                    <a  class="dropdown-item" href="{{route('profile')}}">My Profile</a>
+                                    <a  class="dropdown-item" href="{{ route('edit-profile') }}">Edit Profile</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -74,7 +75,7 @@
             </div>
         </nav>
 
-        <main class="pt-4">
+        <main class="pt-4" style="min-height: 89.3vh" id="app">
             @yield('content')
         </main>
 
@@ -82,5 +83,8 @@
 
         </footer>
     </div>
+    <footer class="shadow-lg p-3 mt-5 bg-body rounded" >
+
+    </footer>
 </body>
 </html>

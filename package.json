@@ -13,6 +13,10 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@vitejs/plugin-vue": "^4.0.0",
         "bootstrap": "^5.3.3"
+    },
+    "optionalDependencies": {
+        "fsevents": "^2.3.3"
     }
 }

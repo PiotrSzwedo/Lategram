@@ -21,16 +21,16 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/profile/', [App\Http\Controllers\ProfilesController::class, 'index']);
+Route::get('/profile/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 
-Route::get('/profile/{name}', [App\Http\Controllers\ProfilesController::class, 'show']);
+Route::get('/profile/{name}', [App\Http\Controllers\ProfileController::class, 'show']);
 
-Route::get('account/profile/edit', [App\Http\Controllers\ProfilesController::class, 'editProfile']);
+Route::get('account/profile/edit', [App\Http\Controllers\ProfileController::class, 'editProfile'])->name("edit-profile");
 
-Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create']);
+Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create'])->name("create-post");
 
 Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show']);
 
 Route::post('/post',  [App\Http\Controllers\PostController::class, 'storage']);
 
-Route::patch("/profile/{user}", [App\Http\Controllers\ProfilesController::class, 'update']);
+Route::patch("/profile/{user}", [App\Http\Controllers\ProfileController::class, 'update']);
