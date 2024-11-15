@@ -25,7 +25,7 @@ Route::get('/profile/', [App\Http\Controllers\ProfileController::class, 'index']
 
 Route::get('/profile/{name}', [App\Http\Controllers\ProfileController::class, 'show']);
 
-Route::get('account/profile/edit', [App\Http\Controllers\ProfileController::class, 'editProfile'])->name("edit-profile");
+Route::patch("/profile/{user}", [App\Http\Controllers\ProfileController::class, 'update']);
 
 Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create'])->name("create-post");
 
@@ -33,4 +33,4 @@ Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show'])
 
 Route::post('/post',  [App\Http\Controllers\PostController::class, 'storage']);
 
-Route::patch("/profile/{user}", [App\Http\Controllers\ProfileController::class, 'update']);
+Route::get('/account/profile/edit', [App\Http\Controllers\ProfileController::class, 'editProfile'])->name("edit-profile");
