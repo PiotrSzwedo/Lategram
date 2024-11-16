@@ -37,7 +37,7 @@
                         class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
                         name="description"
                         value="{{ old('description') ?? $user->profile->description ?? null}}"
-                        autocomplete="description" autofocus>
+                        autocomplete="description">
 
                     @if ($errors->has('description'))
                     <span class="invalid-feedback" role="alert">

@@ -62,13 +62,17 @@ class ProfileController extends Controller
 
         $data = request()->validate([
             'title' => 'required',
-            'description' => 'required',
-            'webpage' => 'url',
-            'image' => '',
+            'description' => 'nullable|string',
+            'webpage' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,svg,webp|max:10240',
         ]);
 
-        $imagePath = request('image')->store('profile', 'public');
-        $imageArray = ['image' => $imagePath];
+        if (request()->hasFile('image')) {
+            $imagePath = request('image')->store('profile', 'public');
+            $imageArray = ['image' => $imagePath];
+        } else {
+            $imageArray = [];
+        }
 
         if (!auth()->user()->profile) {
             auth()->user()->profile()->create($data);
