@@ -10,7 +10,6 @@
         <div class="col-4">
             <div>
                 <h1 class="mb-0" >{{ $post->user->name }}</h1>
-                <h2>{{ $post->title }}</h2>
             </div>
 
             <div>

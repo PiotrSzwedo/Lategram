@@ -8,6 +8,7 @@
 }
 
 .post.open{
+    padding: 1.6rem;
     background: #000000eb;
     position: fixed;
     top: 0;
@@ -15,7 +16,6 @@
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 

@@ -11,22 +11,6 @@
                 <div class="row">
                     <h1>Add New Post</h1>
                 </div>
-                <div class="form-group row">
-                    <label for="caption" class="col-md-4 col-form-label">Post Caption</label>
-
-                    <input id="caption"
-                        type="text"
-                        class="form-control{{ $errors->has('caption') ? ' is-invalid' : '' }}"
-                        name="title"
-                        value="{{ old('caption') }}"
-                        autocomplete="caption" autofocus>
-
-                    @if ($errors->has('caption'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('caption') }}</strong>
-                    </span>
-                    @endif
-                </div>
 
                 <div class="row">
                     <label for="image" class="col-md-4 col-form-label">Post Image</label>

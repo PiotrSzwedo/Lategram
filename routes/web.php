@@ -28,8 +28,6 @@ Route::get("/profile/search/user", [App\Http\Controllers\ProfileController::clas
 
 Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create'])->name("create-post");
 
-Route::get('/post/{post}', [App\Http\Controllers\PostController::class, 'show']);
-
 Route::post('/post',  [App\Http\Controllers\PostController::class, 'storage']);
 
 Route::get('/account/profile/edit', [App\Http\Controllers\ProfileController::class, 'editProfile'])->name("edit-profile");

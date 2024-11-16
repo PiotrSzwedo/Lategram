@@ -23,7 +23,7 @@ class PostController extends Controller
     public function storage(){
         $data = request()->validate([
             'another' => '',
-            'title' => 'required',
+            'body' => 'nullable|string',
             'image' => ['required', 'image'],
         ]);
 
