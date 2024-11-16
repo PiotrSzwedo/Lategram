@@ -81,4 +81,18 @@ class ProfileController extends Controller
 
         return redirect("/profile/{$user->id}");
     }
+
+    public function search(){
+        $data = request()->validate([
+            'data' => 'required|string',
+        ]);
+
+        $user = User::search($data["data"]);
+
+        return json_encode( $user);
+    }
+
+    public function searchUser(){
+        return view("profile/search");
+    }
 }

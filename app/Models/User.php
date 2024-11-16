@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -34,6 +36,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public static $searchable = [
+        'name',
+        'email'
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -61,5 +68,16 @@ class User extends Authenticatable
 
     public function posts(){
         return $this->hasMany(Post::class)->orderBy("created_at", "DESC");
+    }
+
+    public static function search(string $data)
+    {
+        $query = self::query();
+
+        foreach (self::$searchable as $searchable) {
+            $query->orWhere($searchable, 'like', "%$data%");
+        }
+
+        return $query->distinct()->get();
     }
 }

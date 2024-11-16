@@ -18,9 +18,13 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('/profile/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 
-Route::get('/profile/{name}', [App\Http\Controllers\ProfileController::class, 'show']);
+Route::get('/profile/{name}', [App\Http\Controllers\ProfileController::class, 'show'])->name("show-profile");
 
 Route::patch("/profile/{user}", [App\Http\Controllers\ProfileController::class, 'update']);
+
+Route::post("/profile/search/", [App\Http\Controllers\ProfileController::class, 'search']);
+
+Route::get("/profile/search/user", [App\Http\Controllers\ProfileController::class, 'searchUser'])->name("search-user");
 
 Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create'])->name("create-post");
 
