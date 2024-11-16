@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-3 p--5">
-            <img class="image rounded-circle" src="/storage/{{ $user->profile->getProfilePhoto() }}" alt="">
+            <img class="image rounded-circle" src="{{ asset('storage' . $user->profile->getProfilePhoto()) }}" alt="">
         </div>
         <div class="col-9">
             <div>
@@ -33,5 +33,18 @@
     <div class="row pt-5">
         {!! $posts !!}
     </div>
+
+    <script>
+        function open(postId, event) {
+            if (event) event.preventDefault();
+            const post = document.getElementById(postId);
+
+            if (post.classList.contains("open")){
+                post.classList.remove("open");
+            }else{
+                post.classList.add("open");
+            }
+        }
+</script>
 </div>
 @endsection

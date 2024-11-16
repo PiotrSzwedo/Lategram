@@ -10,10 +10,10 @@ import ('./bootstrap');
 import { createApp } from '/node_modules/vue/dist/vue.esm-bundler.js';
 import FollowButton from './components/FollowButton.vue';
 
-const app = createApp({
-    components:{
-        FollowButton
-    },
-});
+// const app = createApp({
+//     components:{
+//         FollowButton
+//     },
+// });
 
-app.mount(".container")
+// app.mount(".container")
