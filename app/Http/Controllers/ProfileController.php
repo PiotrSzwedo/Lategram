@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
@@ -20,13 +21,6 @@ class ProfileController extends Controller
             $user = User::find($name);
 
             if ($user) {
-                $postsHtml = '';
-
-                if ($user->posts){
-                    foreach ($user->posts as $post) {
-                        $postsHtml .= view('post', ['post' => $post, 'user' => $user])->render();
-                    }
-                }
 
                 if (auth()->user()){
                     $isCurrentLoginUserProfile = (bool) (auth()->user()->id == $name);
@@ -36,7 +30,6 @@ class ProfileController extends Controller
 
                 return view("home", [
                     "user" => $user,
-                    "posts" => $postsHtml,
                     "isCurrentLoginUserProfile" => $isCurrentLoginUserProfile
                 ]);
             } else {

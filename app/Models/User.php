@@ -70,6 +70,10 @@ class User extends Authenticatable
         return $this->hasMany(Post::class)->orderBy("created_at", "DESC");
     }
 
+    public function comment(){
+        return $this->hasMany(Comment::class);
+    }
+
     public static function search(string $data)
     {
         $query = self::query();
