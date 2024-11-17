@@ -4,9 +4,9 @@
 
 <div class="post" id="post-{{ $post->id }}">
     <a  class="post-close" href="javascript: document.getElementById('post-{{ $post->id }}').classList.remove('open');">X</a>
-    <div class="row bg-white rounded">
+    <div class="w-100 row bg-white rounded">
         <div class="col-7">
-            <img class="w-100" src="/storage/{{ $post->image }}" alt="">
+            <img class="pt-2 w-100" src="/storage/{{ $post->image }}" alt="">
         </div>
 
         <div class="col-3 border-start">

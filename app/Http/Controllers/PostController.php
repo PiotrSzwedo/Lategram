@@ -12,10 +12,6 @@ class PostController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(\App\Models\Post $post){
-        return view("post/show", ['post' => $post]);
-    }
-
     public function create(){
         return view("post/create");
     }
@@ -30,7 +26,6 @@ class PostController extends Controller
         $imagePath = request('image')->store('uploads', 'public');
 
         auth()->user()->posts()->create([
-            'title' => $data['title'],
             'image' => $imagePath,
             'body' => $data['body'] ?? null
         ]);
