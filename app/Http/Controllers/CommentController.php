@@ -13,11 +13,9 @@ class CommentController extends Controller
 
     public function storage(){
         $data = request()->validate([
-            'body' => 'string',
-            'post_id' => 'string',
+            'body' => 'required|string',
+            'post_id' => 'required|string',
         ]);
-
-        $data["user_id"] = auth()->user()->id;
 
         auth()->user()->comment()->create($data);
     }

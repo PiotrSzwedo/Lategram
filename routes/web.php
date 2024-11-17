@@ -16,6 +16,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post("/comment/add", [App\Http\Controllers\CommentController::class, 'storage'])->name("add_comment");
+
 Route::get('/profile/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
 
 Route::get('/profile/{name}', [App\Http\Controllers\ProfileController::class, 'show'])->name("show-profile");

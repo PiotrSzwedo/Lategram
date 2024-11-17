@@ -30,3 +30,11 @@ right: 5px;
 color: white;
 text-decoration: none;
 }
+
+.comment{
+    border-top: 2px solid;
+}
+
+.b-eeeeee{
+    background: #eeeeee;
+}
