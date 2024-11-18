@@ -18,5 +18,7 @@ class CommentController extends Controller
         ]);
 
         auth()->user()->comment()->create($data);
+
+        return http_response_code(200);
     }
 }

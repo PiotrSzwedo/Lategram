@@ -1,20 +1,28 @@
-document.getElementById('add-comment').addEventListener('submit', function (event) {
-    event.preventDefault();
-
-    const form = event.target;
-    const formData = new FormData(form);
-
-    const userInput = formData.get('body');
-    if (userInput.trim().length === 0) {
-        displayError("Comment cannot be empty");
+function addComment(form, action) {
+    if (!form || !action) {
+        console.error("Form or action URL is missing.");
         return;
     }
 
-    fetch(form.action, {
+    const formData = new FormData(form);
+
+    fetch(action, {
         method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
         body: formData,
     })
-});
+    .then(response => {
+        console.log('Raw response:', response);
+
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            return response.json();
+        } else {
+            return response.text().then(text => {
+                throw new Error(`Expected JSON but got: ${text}`);
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
