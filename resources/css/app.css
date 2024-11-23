@@ -38,3 +38,10 @@ text-decoration: none;
 .b-eeeeee{
     background: #eeeeee;
 }
+
+.comment-filed{
+    position: absolute;
+    top: 95%;
+    left: 5px;
+    right: 5px;
+}
