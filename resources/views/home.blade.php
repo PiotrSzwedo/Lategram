@@ -31,7 +31,9 @@
     </div>
 
     <div class="row pt-5">
-        {!! $posts !!}
+        @foreach ($user->posts as $post)
+            @include('components.post', ['post' => $post])
+        @endforeach
     </div>
 
     <script>
@@ -39,12 +41,12 @@
             if (event) event.preventDefault();
             const post = document.getElementById(postId);
 
-            if (post.classList.contains("open")){
+            if (post.classList.contains("open")) {
                 post.classList.remove("open");
-            }else{
+            } else {
                 post.classList.add("open");
             }
         }
-</script>
+    </script>
 </div>
 @endsection
