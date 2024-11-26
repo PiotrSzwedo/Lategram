@@ -14,7 +14,7 @@
                         @if ($isCurrentLoginUserProfile)
                         <a class="btn btn-primary small-primary-btn" href="{{ route('create-post') }}">Create Post</a>
                         @else
-                        <FollowButton></FollowButton>
+                        <followbutton></followbutton>
                         @endif
                     </div>
                 </div>
@@ -35,18 +35,8 @@
             @include('components.post', ['post' => $post])
         @endforeach
     </div>
-
-    <script>
-        function open(postId, event) {
-            if (event) event.preventDefault();
-            const post = document.getElementById(postId);
-
-            if (post.classList.contains("open")) {
-                post.classList.remove("open");
-            } else {
-                post.classList.add("open");
-            }
-        }
-    </script>
 </div>
+
+@vite(['resources/js/src/showPost.js'])
+@vite(['resources/js/src/addComment.js'])
 @endsection

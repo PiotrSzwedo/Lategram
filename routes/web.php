@@ -14,22 +14,40 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostController;
 
-Route::post("/comment/add", [App\Http\Controllers\CommentController::class, 'storage'])->name("add_comment");
+// ---------------------------
+// Home Routes
+// ---------------------------
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/profile/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+// ---------------------------
+// Comment Routes
+// ---------------------------
+Route::post('/comment/add', [CommentController::class, 'storage'])->name('add_comment');
 
-Route::get('/profile/{name}', [App\Http\Controllers\ProfileController::class, 'show'])->name("show-profile");
+// ---------------------------
+// Profile Routes
+// ---------------------------
+Route::prefix('profile')->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/{name}', [ProfileController::class, 'show'])->name('show-profile');
+    Route::patch('/{user}', [ProfileController::class, 'update']);
+    Route::post('/search', [ProfileController::class, 'search']);
+    Route::get('/search/user', [ProfileController::class, 'searchUser'])->name('search-user');
+});
 
-Route::patch("/profile/{user}", [App\Http\Controllers\ProfileController::class, 'update']);
+// Account-specific profile editing
+Route::get('/account/profile/edit', [ProfileController::class, 'editProfile'])->name('edit-profile');
 
-Route::post("/profile/search/", [App\Http\Controllers\ProfileController::class, 'search']);
-
-Route::get("/profile/search/user", [App\Http\Controllers\ProfileController::class, 'searchUser'])->name("search-user");
-
-Route::get('/post/create', [App\Http\Controllers\PostController::class, 'create'])->name("create-post");
-
-Route::post('/post',  [App\Http\Controllers\PostController::class, 'storage']);
-
-Route::get('/account/profile/edit', [App\Http\Controllers\ProfileController::class, 'editProfile'])->name("edit-profile");
+// ---------------------------
+// Post Routes
+// ---------------------------
+Route::prefix('post')->group(function () {
+    Route::get('/create', [PostController::class, 'create'])->name('create-post');
+    Route::post('/', [PostController::class, 'storage']);
+});
