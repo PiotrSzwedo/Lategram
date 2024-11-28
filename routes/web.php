@@ -1,24 +1,12 @@
 <?php
-
-use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-Auth::routes();
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+
+Auth::routes();
 
 // ---------------------------
 // Home Routes
@@ -50,4 +38,13 @@ Route::get('/account/profile/edit', [ProfileController::class, 'editProfile'])->
 Route::prefix('post')->group(function () {
     Route::get('/create', [PostController::class, 'create'])->name('create-post');
     Route::post('/', [PostController::class, 'storage']);
+});
+
+// ---------------------------
+// Follow Routes
+// ---------------------------
+
+Route::prefix('follow')->group(function () {
+    Route::post("/{profile}", [FollowController::class, 'follow']);
+    Route::post("/un/{profile}", [FollowController::class, 'unFollow']);
 });

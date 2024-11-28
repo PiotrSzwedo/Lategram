@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Profile;
@@ -22,6 +23,8 @@ class ProfileController extends Controller
 
             if ($user) {
 
+                $isFollowed = (bool) Follow::where('profile_id', $user->profile->id)->where('user_id', auth()->id())->exists();
+
                 if (auth()->user()){
                     $isCurrentLoginUserProfile = (bool) (auth()->user()->id == $name);
                 }else {
@@ -30,7 +33,8 @@ class ProfileController extends Controller
 
                 return view("home", [
                     "user" => $user,
-                    "isCurrentLoginUserProfile" => $isCurrentLoginUserProfile
+                    "isCurrentLoginUserProfile" => $isCurrentLoginUserProfile,
+                    "isFollowed" => $isFollowed
                 ]);
             } else {
                 abort(404);

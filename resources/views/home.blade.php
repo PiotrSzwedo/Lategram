@@ -14,7 +14,8 @@
                         @if ($isCurrentLoginUserProfile)
                         <a class="btn btn-primary small-primary-btn" href="{{ route('create-post') }}">Create Post</a>
                         @else
-                        <followbutton></followbutton>
+                        @csrf
+                        <followbutton :csrf="'{!! csrf_token() !!}'" :profile-id="{{ $user->profile->id }}" :followed="{!! $isFollowed !!}"></followbutton>
                         @endif
                     </div>
                 </div>

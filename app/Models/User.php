@@ -84,4 +84,8 @@ class User extends Authenticatable
 
         return $query->distinct()->get();
     }
+
+    public function followed(){
+        return $this->hasMany(Follow::class, 'user_id');
+    }
 }
