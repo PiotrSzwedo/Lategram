@@ -35,4 +35,10 @@ class FollowController extends Controller
 
         return abort(200);
     }
+
+    public function show(){
+        $follows = auth()->user()->followed;
+
+        return view("follows.show", ["follows" => $follows]);
+    }
 }

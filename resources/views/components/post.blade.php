@@ -1,5 +1,6 @@
 <a href="javascript: open('post-{{ $post->id }}')" class="col-4 pb-3">
     <img class="w-100" src="/storage/{{ $post->image }}" alt="{{ $post->title }}">
+    <likebutton></likebutton>
 </a>
 
 <div class="post" id="post-{{ $post->id }}">

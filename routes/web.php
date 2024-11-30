@@ -47,4 +47,5 @@ Route::prefix('post')->group(function () {
 Route::prefix('follow')->group(function () {
     Route::post("/{profile}", [FollowController::class, 'follow']);
     Route::post("/un/{profile}", [FollowController::class, 'unFollow']);
+    Route::get("/my", [FollowController::class, 'show']);
 });
