@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LikeController;
 
 Auth::routes();
 
@@ -38,6 +39,7 @@ Route::get('/account/profile/edit', [ProfileController::class, 'editProfile'])->
 Route::prefix('post')->group(function () {
     Route::get('/create', [PostController::class, 'create'])->name('create-post');
     Route::post('/', [PostController::class, 'storage']);
+    Route::get("/show/{post}", [PostController::class, "show"]);
 });
 
 // ---------------------------
@@ -48,4 +50,13 @@ Route::prefix('follow')->group(function () {
     Route::post("/{profile}", [FollowController::class, 'follow']);
     Route::post("/un/{profile}", [FollowController::class, 'unFollow']);
     Route::get("/my", [FollowController::class, 'show']);
+});
+
+// ---------------------------
+// Like Routes
+// ---------------------------
+
+Route::prefix('like')->group(function () {
+    Route::post('/add/', [LikeController::class, 'storage']);
+    Route::post('/un/', [LikeController::class, 'unLike']);
 });

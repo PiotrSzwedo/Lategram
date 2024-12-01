@@ -1,15 +1,10 @@
-<a href="javascript: document.getElementById('post-{{ $post->id }}').classList.add('open');" class="col-4 pb-3">
-    <img class="w-100" src="/storage/{{ $post->image }}" alt="{{ $post->title }}">
-</a>
-
-<div class="post" id="post-{{ $post->id }}">
-    <a class="post-close" href="javascript: document.getElementById('post-{{ $post->id }}').classList.remove('open');">X</a>
+<div id="app">
+<div class="post open" id="post-{{ $post->id }}">
+    <a class="post-close" href="javascript: document.getElementById('post-{{ $post->id }}').remove()">X</a>
     <div class="w-100 row bg-white rounded">
         <div class="col-7">
-            <div class="responsive-square">
-                <img class="pt-2 pb-2" src="/storage/{{ $post->image }}" alt="">
-            </div>
-            <like csrf="{!! csrf_token() !!}" like-count="{{ count($post->like) }}" post-id="{!! $post->id !!}"></like>
+            <img class="pt-2 w-100" src="/storage/{{ $post->image }}" alt="">
+            <like like-count="{{ count($post->like) }}" post-id="{!! $post->id !!}"></like>
         </div>
 
         <div class="position-relative col-5 border-start" style="overflow: hidden;">
@@ -24,13 +19,12 @@
 
                 <div class="comment" style="height: 63% !important;">
                     @foreach ($post->comments as $comment)
-                    @include("components.comment", ["comment" => $comment])
+                        @include("components.comment", ["comment" => $comment])
                     @endforeach
                 </div>
 
                 <div class="comment-filed">
-                    <form
-                        id="add-comment-{{ $post->id }}"
+                    <form id="add-comment-{{ $post->id }}"
                         action="javascript: addComment(document.getElementById('add-comment-{{ $post->id }}'), '{{ route("add_comment") }}')"
                         method="post">
                         @csrf
@@ -39,7 +33,7 @@
                             <input type="text" class="form-control-file w-100 p-0" id="body" name="body"></input>
 
                             @if ($errors->has('body'))
-                            <strong>{{ $errors->first('body') }}</strong>
+                                <strong>{{ $errors->first('body') }}</strong>
                             @endif
                         </div>
                     </form>
@@ -47,4 +41,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

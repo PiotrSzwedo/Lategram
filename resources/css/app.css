@@ -45,3 +45,20 @@ text-decoration: none;
     left: 5px;
     right: 5px;
 }
+
+.responsive-square {
+    aspect-ratio: 1; 
+    width: 100%; 
+    max-width: 500px;
+    margin: auto; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+.responsive-square img {
+    width: 100%;
+    object-position: center;
+    object-fit: cover
+}

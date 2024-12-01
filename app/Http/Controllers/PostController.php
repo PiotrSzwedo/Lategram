@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -31,5 +32,9 @@ class PostController extends Controller
         ]);
 
         redirect("/profile" . auth()->user()->id);
+    }
+
+    public function show(Post $post){
+        return view("post.show", ["post" => $post]);
     }
 }

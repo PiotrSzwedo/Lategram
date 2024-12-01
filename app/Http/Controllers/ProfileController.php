@@ -80,6 +80,8 @@ class ProfileController extends Controller
             ));
         }
 
+        dd(count( $user->profile->like));
+
         return redirect("/profile/{$user->id}");
     }
 
