@@ -31,11 +31,7 @@
         </div>
     </div>
 
-    <div class="row pt-5">
-        @foreach ($user->posts as $post)
-            @include('components.post', ['post' => $post])
-        @endforeach
-    </div>
+    <post offset="{!! $offset ?: 0 !!}" profile_id="{!! $user->id !!}" first-post-number=0 csrf="{!! csrf_token() !!}"></post>
 </div>
 
 @vite(['resources/js/src/showPost.js'])

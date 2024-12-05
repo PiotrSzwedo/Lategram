@@ -9,15 +9,18 @@ use App\Models\Post;
 class PostController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
-    public function create(){
+    public function create()
+    {
         return view("post/create");
     }
 
-    public function storage(){
+    public function storage()
+    {
         $data = request()->validate([
             'another' => '',
             'body' => 'nullable|string',
@@ -34,7 +37,31 @@ class PostController extends Controller
         redirect("/profile" . auth()->user()->id);
     }
 
-    public function show(Post $post){
-        return view("post.show", ["post" => $post]);
+    public function show()
+    {
+        // Walidacja danych wejściowych
+        $data = request()->validate([
+            "post_id" => "required|integer",
+            "profile_id" => "required|integer",
+            "limit" => "required|integer|min:1",
+            "offset" => "required|integer|min:0",
+        ]);
+
+        $posts = Post::where('user_id', $data['profile_id'])
+            ->orderBy('id', 'asc')
+            ->offset($data['offset'])
+            ->limit($data['limit'])
+            ->get();
+
+        if ($posts) {
+
+            return response()->json([
+                'posts' => view("components.posts", ["posts" => $posts])->render(), 
+                'total' => $posts->count(),
+            ]);
+    }
+        
+
+        return response()->json(['message' => ''], 404);
     }
 }

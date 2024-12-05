@@ -16,7 +16,7 @@ class ProfileController extends Controller
         return $this->show(auth()->user()->id);
     }
 
-    public function show($name = null)
+    public function showWhiteOffset($name, $offset)
     {
         if ($name != null && is_numeric($name)) {
             $user = User::find($name);
@@ -34,7 +34,8 @@ class ProfileController extends Controller
                 return view("home", [
                     "user" => $user,
                     "isCurrentLoginUserProfile" => $isCurrentLoginUserProfile,
-                    "isFollowed" => $isFollowed
+                    "isFollowed" => $isFollowed,
+                    "offset" => $offset
                 ]);
             } else {
                 abort(404);
@@ -42,6 +43,10 @@ class ProfileController extends Controller
         }
 
         abort(404);
+    }
+
+    public function show($name){
+        return $this->showWhiteOffset($name, 0);
     }
 
     public function editProfile(){

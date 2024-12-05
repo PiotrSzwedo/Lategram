@@ -25,6 +25,7 @@ Route::post('/comment/add', [CommentController::class, 'storage'])->name('add_co
 Route::prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('profile');
     Route::get('/{name}', [ProfileController::class, 'show'])->name('show-profile');
+    Route::get('/{name}/offset/{offset}', [ProfileController::class, "showWhiteOffset"]);
     Route::patch('/{user}', [ProfileController::class, 'update']);
     Route::post('/search', [ProfileController::class, 'search']);
     Route::get('/search/user', [ProfileController::class, 'searchUser'])->name('search-user');
@@ -39,7 +40,7 @@ Route::get('/account/profile/edit', [ProfileController::class, 'editProfile'])->
 Route::prefix('post')->group(function () {
     Route::get('/create', [PostController::class, 'create'])->name('create-post');
     Route::post('/', [PostController::class, 'storage']);
-    Route::get("/show/{post}", [PostController::class, "show"]);
+    Route::post('/get/', [PostController::class, 'show']);
 });
 
 // ---------------------------

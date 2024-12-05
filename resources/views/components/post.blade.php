@@ -1,4 +1,4 @@
-<a href="javascript: document.getElementById('post-{{ $post->id }}').classList.add('open');" class="col-4 pb-3">
+<a href="javascript: document.getElementById('post-{{ $post->id }}').classList.add('open');" class="col-4">
     <img class="w-100" src="/storage/{{ $post->image }}" alt="{{ $post->title }}">
 </a>
 
