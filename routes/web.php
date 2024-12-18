@@ -25,14 +25,19 @@ Route::post('/comment/add', [CommentController::class, 'storage'])->name('add_co
 Route::prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('profile');
     Route::get('/{name}', [ProfileController::class, 'show'])->name('show-profile');
-    Route::get('/{name}/offset/{offset}', [ProfileController::class, "showWhiteOffset"]);
+    Route::get('/{name}/offset/{offset}', [ProfileController::class, "showWithOffset"]);
     Route::patch('/{user}', [ProfileController::class, 'update']);
     Route::post('/search', [ProfileController::class, 'search']);
     Route::get('/search/user', [ProfileController::class, 'searchUser'])->name('search-user');
 });
 
-// Account-specific profile editing
-Route::get('/account/profile/edit', [ProfileController::class, 'editProfile'])->name('edit-profile');
+// ---------------------------
+// Account routes
+// ---------------------------
+Route::prefix('account')->group(function () {
+    Route::get('/profile/edit', [ProfileController::class, 'editProfile'])->name('edit-profile');
+    Route::get('/account/edit', [ProfileController::class, 'editProfile'])->name('edit-account');
+});
 
 // ---------------------------
 // Post Routes

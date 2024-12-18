@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
         return $this->show(auth()->user()->id);
     }
 
-    public function showWhiteOffset($name, $offset)
+    public function showWithOffset($name, $offset)
     {
         if ($name != null && is_numeric($name)) {
             $user = User::find($name);
@@ -25,14 +26,25 @@ class ProfileController extends Controller
 
                 $isFollowed = (bool) Follow::where('profile_id', $user->profile->id)->where('user_id', auth()->id())->exists();
 
-                if (auth()->user()){
+                if (auth()->user()) {
                     $isCurrentLoginUserProfile = (bool) (auth()->user()->id == $name);
-                }else {
+                } else {
                     $isCurrentLoginUserProfile = false;
+                }
+
+
+                if ($offset && $offset > 0) {
+                    $posts = Post::where('user_id', $name)
+                        ->orderBy('id', 'asc')
+                        ->limit($offset)
+                        ->get();
+                }else{
+                    $posts = null;
                 }
 
                 return view("home", [
                     "user" => $user,
+                    "posts" => $posts,
                     "isCurrentLoginUserProfile" => $isCurrentLoginUserProfile,
                     "isFollowed" => $isFollowed,
                     "offset" => $offset
@@ -45,11 +57,13 @@ class ProfileController extends Controller
         abort(404);
     }
 
-    public function show($name){
-        return $this->showWhiteOffset($name, 0);
+    public function show($name)
+    {
+        return $this->showWithOffset($name, 0);
     }
 
-    public function editProfile(){
+    public function editProfile()
+    {
         if (!Auth::check()) {
             return redirect()->route('login');
         }
@@ -59,8 +73,10 @@ class ProfileController extends Controller
         return view("profile/edit", ["user" => $user]);
     }
 
-    public function update(User $user){
-        if ($user->id != auth()->user()->id) abort(403);
+    public function update(User $user)
+    {
+        if ($user->id != auth()->user()->id)
+            abort(403);
 
         $data = request()->validate([
             'title' => 'required',
@@ -85,22 +101,24 @@ class ProfileController extends Controller
             ));
         }
 
-        dd(count( $user->profile->like));
+        dd(count($user->profile->like));
 
         return redirect("/profile/{$user->id}");
     }
 
-    public function search(){
+    public function search()
+    {
         $data = request()->validate([
             'data' => 'required|string',
         ]);
 
         $user = User::search($data["data"]);
 
-        return json_encode( $user);
+        return json_encode($user);
     }
 
-    public function searchUser(){
+    public function searchUser()
+    {
         return view("profile/search");
     }
 }

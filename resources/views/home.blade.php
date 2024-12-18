@@ -31,7 +31,13 @@
         </div>
     </div>
 
-    <post offset="{!! $offset ?: 0 !!}" profile_id="{!! $user->id !!}" first-post-number=0 csrf="{!! csrf_token() !!}"></post>
+    <div class="row pt-5">
+        @if ($offset != 0)
+            @include("components.posts", ["posts" => $posts])
+        @endif
+                
+        <post offset="{!! $offset ?: 0 !!}" profile_id="{!! $user->id !!}" first-post-number=0 csrf="{!! csrf_token() !!}"></post>
+    </div>
 </div>
 
 @vite(['resources/js/src/showPost.js'])

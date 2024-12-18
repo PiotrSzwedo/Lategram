@@ -41,7 +41,6 @@ class PostController extends Controller
     {
         // Walidacja danych wejściowych
         $data = request()->validate([
-            "post_id" => "required|integer",
             "profile_id" => "required|integer",
             "limit" => "required|integer|min:1",
             "offset" => "required|integer|min:0",
@@ -53,11 +52,14 @@ class PostController extends Controller
             ->limit($data['limit'])
             ->get();
 
+        $hasMore = $posts->count() - Post::where('user_id', $data['profile_id'])->count() > 0;
+
         if ($posts) {
 
             return response()->json([
                 'posts' => view("components.posts", ["posts" => $posts])->render(), 
                 'total' => $posts->count(),
+                'has_more' => $hasMore
             ]);
     }
         

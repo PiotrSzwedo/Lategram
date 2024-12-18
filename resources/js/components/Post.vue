@@ -1,5 +1,5 @@
 <template>
-    <div class="row pt-5" v-html="addPostHTML"></div>
+    <div v-html="addPostHTML"></div>
     <button class="btn btn-gray" @click="getPost" v-show="showMoreButton">
         Show more
     </button>
@@ -26,7 +26,6 @@ export default {
                     "X-CSRF-TOKEN": `${this.csrf}`,
                 },
                 body: JSON.stringify({
-                    post_id: this.firstPostNumber,
                     profile_id: this.profile_id,
                     offset: this.offset2,
                     limit: 9,
@@ -39,15 +38,12 @@ export default {
                 const data = await response.json();
 
                 if (data.posts) {
-                    const completePosts = data.total;
-                    this.html += data.posts;
-
-                    console.log(completePosts);
-
-                    this.offset2 += completePosts;
-                } else {
-                    console.log("No more posts to load.");
+                    this.html += data.posts;    
+                    this.offset2 += data.total;
                 }
+                
+                
+                this.isMore = data.has_more;
             }
         },
     },
