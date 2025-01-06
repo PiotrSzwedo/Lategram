@@ -32,7 +32,7 @@
     </div>
 
     <div class="row pt-5">
-        @if ($offset != 0)
+        @if ($offset && $offset > 0)
             @include("components.posts", ["posts" => $posts])
         @endif
                 

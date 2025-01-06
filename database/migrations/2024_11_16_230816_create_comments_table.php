@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('post_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->longText('body')->nullable();
+            $table->enum("comment_type", ["text", "image", "video"]);
+            $table->foreignId('reply_to_comment_id')->nullable()->constrained('comments')->onDelete('cascade');
             $table->timestamps();
         });
     }
